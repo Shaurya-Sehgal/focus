@@ -1,0 +1,220 @@
+/* Homepage sections. */
+
+/* ---------- Hero (dark, with the light ribbon) ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--night);
+  color: #fff;
+  padding-block: clamp(1.5rem, 0.5rem + 3vw, 3.5rem) 1.25rem;
+}
+@media (min-width: 56rem) {
+  /* Fill the first screen on laptops, but never stretch on very tall windows. */
+  .hero {
+    min-height: min(calc(100svh - 5.25rem), 52rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.hero :focus-visible {
+  outline-color: #fff;
+}
+.hero__grid {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 56rem) {
+  .hero__grid {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: end;
+    column-gap: clamp(3rem, 8vw, 8rem);
+  }
+}
+.hero__title {
+  font-size: clamp(2.625rem, 1.4rem + 3.8vw, 5rem);
+  font-weight: 850;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  max-width: 11em;
+}
+.hero__lede {
+  margin-top: 1.5rem;
+  max-width: 32rem;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: #c9d3ee;
+}
+.hero__action {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+.hero__note {
+  font-size: var(--step--1);
+  color: #a9b6da;
+  max-width: 17rem;
+  line-height: 1.45;
+}
+
+/* Where the ribbon gathers: a clear band on phones, beside the habit choices on desktop. */
+.hero__try {
+  position: relative;
+}
+.hero__anchor {
+  display: block;
+  height: 8rem;
+}
+@media (min-width: 56rem) {
+  .hero__anchor {
+    position: absolute;
+    left: -1.25rem;
+    top: -1.5rem;
+    width: 1px;
+    height: 1px;
+  }
+}
+
+.choices {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1rem;
+  min-width: 0;
+}
+.choices__legend {
+  padding: 0;
+  margin-bottom: 0.625rem;
+  font-size: var(--step--1);
+  color: #a9b6da;
+}
+.choices__row {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgb(8 18 48 / 0.6);
+  border: 1px solid rgb(255 255 255 / 0.18);
+}
+.choice {
+  position: relative;
+}
+.choice span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #dfe6fa;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 160ms var(--ease-out);
+}
+.choice input:checked + span {
+  background: #fff;
+  color: var(--ink);
+}
+.choice input:focus-visible + span {
+  outline: 3px solid var(--cyan);
+  outline-offset: 2px;
+}
+.choice span:active {
+  transform: scale(0.97);
+}
+@media (hover: hover) and (pointer: fine) {
+  .choice input:not(:checked) + span:hover {
+    background: rgb(255 255 255 / 0.1);
+  }
+}
+
+.habit-card {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.7);
+}
+.habit-card :focus-visible {
+  outline-color: var(--blue);
+}
+.habit-card__stack {
+  display: grid;
+}
+.habit-card__body {
+  grid-area: 1 / 1;
+  min-height: 9.25rem;
+}
+.habit-card__sizer {
+  visibility: hidden;
+}
+.habit-card__kicker {
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--blue);
+}
+.habit-card__name {
+  margin-top: 0.375rem;
+  font-size: var(--step-2);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.habit-card__text {
+  margin-top: 0.625rem;
+  color: var(--slate);
+}
+.habit-card__link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: var(--step--1);
+  font-weight: 600;
+  padding-block: 0.25rem;
+}
+
+/* ---------- About ---------- */
+.about {
+  background: var(--mist);
+}
+.about__grid {
+  display: grid;
+  gap: 3rem 5rem;
+}
+@media (min-width: 56rem) {
+  .about__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.about__grid .h2 + p {
+  margin-top: 1.25rem;
+  max-width: var(--measure);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+.about__survey {
+  margin-top: 2.5rem;
+}
+.about__survey p {
+  margin: 0.5rem 0 1.25rem;
+}
+.about .h3 + .muted {
+  margin-top: 0.25rem;
+}
+.goals {
+  list-style: none;
+  padding: 0;
+  margin-block: 1.25rem;
+}
+.goals li {
+  padding-block: 0.875rem;
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+}
+.goals li:last-child {
+  border-bottom: 1px solid var(--line);
+}

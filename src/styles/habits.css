@@ -1,0 +1,242 @@
+/* ---------- Habits: dark band, choice + text (left), artwork panel (right) ---------- */
+.habits {
+  position: relative;
+  overflow: hidden;
+  background: var(--night);
+  color: #fff;
+  padding-block: var(--section);
+}
+.habits :focus-visible {
+  outline-color: #fff;
+}
+.habits__grid {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+@media (min-width: 56rem) {
+  .habits__grid {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    column-gap: clamp(2.5rem, 5vw, 5rem);
+  }
+}
+.habits .h2 {
+  margin-bottom: 2rem;
+}
+.habits__live {
+  margin-top: 1.75rem;
+  min-height: 10rem;
+}
+.habits__text {
+  margin-top: 0.75rem;
+  max-width: 30rem;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: #c9d3ee;
+}
+.habits__aside {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  max-width: 30rem;
+  border-top: 1px solid rgb(255 255 255 / 0.15);
+  font-size: var(--step--1);
+  color: #a9b6da;
+}
+.habits__aside strong {
+  color: #fff;
+}
+
+/* Artwork panel. Back to front: page background and ribbon, the Blender artwork (5:4, framed for this ratio
+   in Blender), a translucent caption surface, crisp text. One fine edge, no padded frame. */
+.habit-figure {
+  min-width: 0;
+}
+.habit-stage {
+  perspective: 1400px;
+}
+.habit-panel {
+  position: relative;
+  --tilt-x: 0;
+  --tilt-y: 0;
+  --tilt-m: 0; /* how far the panel is turned, 0–1 */
+}
+.habit-panel__art {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  aspect-ratio: 5 / 4; /* fixed, so switching habits or loading assets never moves the layout */
+  border-radius: 18px;
+  background: #0b1640; /* until a still has loaded */
+  box-shadow:
+    0 0 0 1px rgb(150 178 235 / 0.14), /* the one fine edge */
+    0 2px 4px rgb(2 6 24 / 0.25),
+    0 36px 70px -36px rgb(2 6 24 / 0.85);
+}
+/* Top-edge reflection, drawn inside the edge so it stays crisp. */
+.habit-panel__art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16);
+  pointer-events: none;
+}
+/* A broad, faint sheen across the glass that shifts a little with the viewing angle (never a spotlight). */
+.habit-panel__sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(118deg, rgb(225 236 255 / 0.1), rgb(225 236 255 / 0.03) 30%, rgb(225 236 255 / 0) 52%);
+  background-size: 160% 160%;
+  background-position: calc(40% - var(--tilt-x) * 24%) calc(40% - var(--tilt-y) * 24%);
+  opacity: calc(0.75 + 0.45 * var(--tilt-m)); /* a little stronger as the angle grows */
+  pointer-events: none;
+}
+
+/* The caption: a separate translucent surface over the lower part of the scene. */
+.habit-caption {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  margin: -2.5rem 0.75rem 0; /* phones: overlaps the artwork's lower edge */
+  padding: 0.95rem 1.15rem 1.05rem;
+  border: 1px solid rgb(150 178 235 / 0.16);
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 150% at 0% 0%, rgb(79 209 255 / 0.07), rgb(79 209 255 / 0) 55%), /* faint accent corner */
+    linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0) 45%),
+    rgb(12 20 46 / 0.55);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.13),
+    0 14px 34px -16px rgb(2 6 24 / 0.8);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  /* Rides ahead of the artwork as the panel tilts (as a layer about 70 px nearer would), so it reads as
+     a separate foreground surface while staying attached to the panel. */
+  transform: translate3d(calc(var(--tilt-x) * 7px), calc(var(--tilt-y) * 5px), 0);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .habit-caption {
+    background: rgb(12 20 46 / 0.88);
+  }
+}
+@media (min-width: 40rem) {
+  .habit-caption {
+    position: absolute;
+    left: clamp(0.875rem, 2vw, 1.375rem);
+    bottom: clamp(0.875rem, 2vw, 1.375rem);
+    width: min(25rem, 62%);
+    margin: 0;
+    padding: 1.05rem 1.3rem 1.15rem;
+  }
+}
+.habit-caption__item {
+  grid-area: 1 / 1;
+  align-self: center; /* the shorter caption sits centred in the space the longer one needs */
+  transition:
+    opacity 260ms var(--ease-out),
+    visibility 0s;
+}
+.habit-caption__item[data-active='false'] {
+  opacity: 0;
+  visibility: hidden; /* also out of the accessibility tree */
+  transition:
+    opacity 200ms ease,
+    visibility 0s 200ms;
+}
+.habit-caption__moment {
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--cyan);
+}
+.habit-caption__name {
+  margin-top: 0.3rem;
+  font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.625rem);
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: #fff;
+}
+
+/* One layer per moment; switching cross-fades them in place. */
+.habit-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 450ms ease;
+}
+.habit-scene[data-active='true'] {
+  opacity: 1;
+}
+.habit-scene__still,
+.habit-scene__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.habit-scene__still {
+  object-fit: cover; /* same 5:4 as the panel; habitSceneRenderer.ts gives the 3D camera the same frame */
+}
+.habit-scene__canvas {
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+.habit-scene[data-ready='true'] .habit-scene__canvas {
+  opacity: 1;
+}
+
+.habit-controls {
+  margin-top: 0.875rem;
+}
+.habit-controls__slot {
+  display: flex;
+  min-height: 2.75rem; /* the same with or without the button */
+  margin-top: 0;
+}
+.habit-controls__toggle {
+  box-sizing: border-box;
+  height: 2.75rem; /* exactly the slot height */
+  padding: 0 1.1rem;
+  line-height: 1;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: 999px;
+  background: rgb(8 18 48 / 0.35);
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+.habit-controls__toggle[aria-pressed='true'] {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+}
+.habit-controls__toggle:active {
+  transform: scale(0.97);
+}
+.habit-controls__toggle:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+@media (hover: hover) and (pointer: fine) {
+  .habit-controls__toggle:not(:disabled, [aria-pressed='true']):hover {
+    border-color: #fff;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .habit-scene,
+  .habit-scene__canvas,
+  .habit-caption__item {
+    transition-duration: 1ms;
+    transition-delay: 0s;
+  }
+}

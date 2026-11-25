@@ -1,0 +1,40 @@
+/* Design tokens: change the campaign's colours, type and spacing here. */
+:root {
+  /* Colour */
+  --paper: #ffffff;
+  --ink: #0e1a3d; /* dark navy: text, footer */
+  --blue: #1f5eff; /* clear blue: actions, challenge week (5.1:1 on white) */
+  --blue-deep: #1747c7; /* hover/pressed blue */
+  --mist: #eef2fd; /* pale blue band */
+  --night: #081230; /* deeper navy behind the hero light */
+  --cyan: #4fd1ff; /* light and focus rings on dark */
+  --slate: #4a5575; /* secondary text (7:1 on white) */
+  --line: #d6ddee;
+  /* Proposed, not yet approved: --lemon: #f2e14c; */
+
+  /* Type */
+  --font: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --step-3: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --step-4: clamp(2.75rem, 1.6rem + 5.2vw, 6.25rem);
+
+  /* Space */
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --section: clamp(4.5rem, 3rem + 7vw, 9rem);
+  --measure: 38rem;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --radius: 6px;
+
+  /* Surfaces (the Habits panel's principles): one fine edge, a faint top reflection, a soft shadow. */
+  --edge: rgb(14 26 61 / 0.09); /* fine edge on light backgrounds */
+  --lift: 0 1px 2px rgb(14 26 61 / 0.05), 0 24px 48px -32px rgb(14 26 61 / 0.3);
+  --surface-light:
+    radial-gradient(120% 90% at 0% 0%, rgb(31 94 255 / 0.05), rgb(31 94 255 / 0) 55%),
+    linear-gradient(180deg, #f7f9fe, var(--mist));
+}

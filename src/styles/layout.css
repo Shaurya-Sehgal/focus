@@ -1,0 +1,315 @@
+/* Shared: page width, header, footer, buttons, headings. */
+.wrap {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+.h2 {
+  font-size: var(--step-3);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.h3 {
+  font-size: var(--step-1);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.muted {
+  color: var(--slate);
+}
+
+.plain-list {
+  padding-left: 1.1em;
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* Shared motion: content that changes after a choice (hero card, habit text, steps, evidence). */
+@media (prefers-reduced-motion: no-preference) {
+  .swap-in {
+    animation: swap-in 260ms var(--ease-out);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .swap-in {
+    animation: swap-fade 200ms ease;
+  }
+}
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+}
+@keyframes swap-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The ribbon: a layer the height of the whole page, between section backgrounds and their content
+   (section content sits above it at z-index 1). Its canvas scrolls with the page, so the light never
+   lags behind while scrolling; PageRibbon moves it to stay around the visible area. It ignores clicks. */
+#root {
+  position: relative;
+}
+.page-ribbon {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.page-ribbon canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  will-change: transform;
+}
+main .wrap {
+  position: relative;
+  z-index: 1;
+}
+@media print {
+  .page-ribbon {
+    display: none;
+  }
+}
+
+/* Chapter navigation: wide screens only, after the hero. */
+.chapters {
+  display: none;
+}
+@media (min-width: 96rem) {
+  .chapters {
+    display: block;
+    position: fixed;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    transition:
+      opacity 200ms ease,
+      visibility 200ms;
+  }
+  .chapters[data-visible='false'] {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.chapters ol {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  display: grid;
+  gap: 0.125rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px -18px rgb(14 26 61 / 0.45);
+}
+/* Each row: a fixed 1.25rem marker column, a gap, then the label. The marker never leaves its column. */
+.chapters a {
+  display: grid;
+  grid-template-columns: 1.25rem auto;
+  column-gap: 0.625rem;
+  align-items: center;
+  padding: 0.4rem 0.75rem 0.4rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--slate);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+.chapters a::before {
+  content: '';
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.4;
+  transform-origin: left;
+  transform: scaleX(0.5);
+  transition:
+    transform 200ms var(--ease-out),
+    opacity 200ms ease,
+    background-color 200ms ease;
+}
+.chapters a[aria-current] {
+  color: var(--ink);
+}
+.chapters a[aria-current]::before {
+  transform: scaleX(1);
+  opacity: 1;
+  background: var(--blue);
+}
+@media (hover: hover) and (pointer: fine) {
+  .chapters a:hover {
+    color: var(--blue);
+  }
+}
+
+/* Button */
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--step-0);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition:
+    background-color 160ms ease,
+    transform 160ms var(--ease-out);
+}
+.button:active {
+  transform: scale(0.97);
+  background: var(--blue-deep);
+}
+.button:focus-visible {
+  outline-color: var(--ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background: var(--blue-deep);
+  }
+}
+
+/* Header */
+.site-header {
+  position: relative;
+  background: var(--night); /* same navy as the hero, so they read as one opening */
+  color: #fff;
+}
+.site-header :focus-visible {
+  outline-color: #fff;
+}
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  padding-block: 1.25rem;
+}
+.site-header__home {
+  display: block;
+  border-radius: var(--radius);
+}
+.site-header__logo {
+  width: 7.5rem;
+}
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.75rem;
+  list-style: none;
+  padding: 0;
+  font-weight: 600;
+  font-size: var(--step-0);
+}
+.site-nav a {
+  display: inline-block;
+  padding-block: 0.5rem;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .site-nav a:hover {
+    color: var(--cyan);
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 40rem) {
+  .site-header__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .site-header__logo {
+    width: 6.5rem;
+  }
+  .site-nav {
+    gap: 0 1.25rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* Footer */
+.site-footer {
+  background: var(--ink);
+  color: #dfe5f5;
+  padding-block: 4.5rem 2rem;
+  font-size: 0.9375rem;
+}
+.site-footer :focus-visible {
+  outline-color: #fff;
+}
+.site-footer__grid {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 60rem) {
+  .site-footer__grid {
+    grid-template-columns: 1fr 1.4fr 1fr;
+  }
+}
+.site-footer__logo {
+  width: 8rem;
+  margin-bottom: 1rem;
+}
+.site-footer__nav {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.25rem;
+}
+.site-footer__nav a {
+  display: inline-block;
+  padding-block: 0.25rem;
+  color: #fff;
+}
+.site-footer__title {
+  color: #fff;
+  font-size: var(--step-0);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.site-footer p + p {
+  margin-top: 0.75rem;
+}
+.source-list {
+  padding-left: 1.25em;
+  display: grid;
+  gap: 0.875rem;
+}
+.source-list a {
+  color: #fff;
+  white-space: nowrap;
+}
+.site-footer__credits {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(255 255 255 / 0.15);
+  color: #aab5d3;
+  font-size: var(--step--1);
+}

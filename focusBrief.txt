@@ -1,0 +1,69 @@
+
+focus. is a digital-wellness awareness campaign about short-form media, focus, sleep and academic performance.
+Audience: local high-school students in Grades 9-12; teachers and parents are secondary audiences.
+Purpose: explain the evidence carefully, offer manageable digital habits and introduce a voluntary seven-day challenge.
+
+WEBSITE VERSION ONE
+Create an informational website first. Registration comes later.
+No accounts, registration form, waitlist, participant database, public leaderboard, prize entries or screen-time tracking in this release. The existing survey is a separate teammate-owned task and must not be edited or replaced. Do not add tracking scripts or analytics without a separate decision.
+Primary action: Explore the challenge. It must link to a working information page.
+Describe registration as not yet open. Display app downloads only when there is a genuine supported installation route.
+
+CAMPAIGN PLAN
+Planned targets by January 19, 2027: four presentations reaching approximately 100 students; 500-1,000 accounts reached online; 50 eligible challenge registrations; at least 30 completions. These are goals, not achieved results.
+The secondary evaluation target is a 15% reduction in average daily use of selected social-media apps, subject to approvals and technical feasibility.
+Four planned classroom sessions last 15-20 minutes each, combining a local statistic, a short activity, a demonstration of built-in usage settings and a practical habit.
+Planned publicity includes ten QR-code posters, two educational social posts weekly, school announcements and student-council reposts.
+
+CHALLENGE
+Planned baseline week: January 4-10, 2027.
+Planned challenge week: January 11-17, 2027.
+Participants record daily minutes for a fixed list of selected social-media apps, using the same list and measurement method across both weeks. Whole-app time can include messaging and longer videos; it does not isolate short-form video.
+Example habits already in the campaign: a phone-free study block or avoiding short-form entertainment during the hour before bed.
+Submitted award proposal: logging the chosen habit on at least five of seven days and submitting a short reflection earns one prize-draw entry. A five-question learning quiz earns one bonus entry. Winners are drawn randomly. Participation is voluntary and free.
+Final rules, eligibility, required consent, approved data handling and any prizes must be confirmed before opening registration. No prizes or external contributions are currently confirmed by this brief.
+
+PROPOSED TECHNOLOGY
+The website provides educational resources and, later, registration information. The proposed app provides instructions, reminders, personal goals, habit logs and learning prompts. Automatic tracking, device support and app distribution are unconfirmed. The informational website does not monitor phone usage.
+Required school approvals and consent precede recruitment and data collection. Future evaluation uses participant codes and published group summaries, reporting attendance, reach, registrations, completions, quiz scores and usage separately. Before/after changes alone do not establish causation.
+
+COMMUNITY SUPPORT
+Potential support from local education staff, public-health professionals, university psychology educators, a public library and local businesses may include access to presentation spaces, educational resources, an interview, promotion, an offline activity, printing or modest prizes.
+These are proposed relationships. Do not show partner logos, endorsements or confirmed contributions without evidence and appropriate permission.
+
+EXISTING ASSETS
+Four original poster designs: Attention, Studying, Sleep, and Your Time. Your Choice.
+Use actual supplied assets and credit underlying photographs or other externally sourced material appropriately. Ask for missing final files rather than inventing finished materials. Do not reuse third-party website imagery from the reference videos as campaign artwork.
+
+PAGES
+Home: campaign introduction, one clear visual, a useful habit, a challenge preview and an Explore the challenge link.
+Learn: focus, sleep and studying, with claim-specific research links and appropriate limitations.
+Challenge: planned dates, baseline/challenge explanation, eligibility, habit examples, proposed completion/prize mechanism, FAQ and current registration status.
+Resources: actual posters with readable previews and working downloads; links to reliable sources.
+About: campaign purpose and goals. Leave personal attribution for later approved content.
+Footer: Sources and Privacy. Privacy copy must describe actual features and verified hosting arrangements; do not invent policies or contact details.
+
+VISUAL DIRECTION
+Keep the lowercase focus. mark and the existing minimalist aesthetic. Propose true white, dark navy and clear blue, with bold readable sans-serif typography and generous space. A small lemon highlight is an optional proposed accent, not an approved existing brand color.
+Possible hero headline from an existing poster: Your attention is worth more than a scroll.
+One short optional motion sequence can let overlapping feed-like visual layers settle into a calm composition. Keep text and navigation immediately usable and provide reduced-motion support. Avoid a blocking loader, scroll hijacking, constant animation and cursor effects.
+Design intentionally for both mobile and desktop. Use natural Canadian English. Do not add generic sales copy, invented testimonials or fake success counters.
+
+RESEARCH
+The campaign's research includes Ontario screen-use data, Halton sleep data, Canadian research on social media and sleep, and studies of short-video use, attention and academic outcomes in different populations.
+Verify primary sources before publishing claims. Distinguish Ontario/Halton findings from measurements of the campaign's own audience. Explain observational limits and differences between social-media use, recreational screen time and short-form-video use. Do not invent new statistics, medical claims or guaranteed outcomes.
+
+Source starting points:
+https://www.camh.ca/-/media/research-files/osduhs/summary-mental-health-and-well-being-report_2025-osduhs-pdf.pdf
+https://ourkidsnetwork.ca/youth-mental-health-report/
+https://www.canada.ca/en/public-health/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-44-no-7-8-2024/social-media-sleep-health-among-adolescents-canada.html
+https://doi.org/10.1186/s40359-024-01865-9
+https://doi.org/10.3389/fnhum.2024.1383913
+https://doi.org/10.1371/journal.pone.0309899
+https://doi.org/10.17275/per.22.50.9.2
+https://doi.org/10.1016/j.heliyon.2024.e30346
+https://pubmed.ncbi.nlm.nih.gov/37167877/
+
+BUILD WORKFLOW
+Begin with a desktop/mobile homepage preview, sitemap and short plan. Get design feedback before extending the site. A small React/TypeScript/Vite project is a reasonable proposed starting point, with simple CSS and minimal dependencies.
+After implementation, verify every page, navigation, keyboard access, mobile wrapping, reduced motion, source links and downloads in a browser. Confirm registration is honestly closed and no participant data is submitted. Explain how to run the project and provide screenshots. Ask before adding campaign commitments or publishing.
